@@ -4,108 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDoS Incident Response Tutor</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
-        /* Simple styles for collapsible sections */
-        .collapsible {
-            background-color: #f1f1f1;
-            color: #333;
-            cursor: pointer;
-            padding: 10px;
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .timeline-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin: 20px 0;
             width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 18px;
+            max-width: 800px;
         }
 
-        .active, .collapsible:hover {
-            background-color: #ddd;
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background-color: #ccc;
+            top: 50%;
+            left: 0;
+            z-index: 0;
         }
 
-        .content {
-            padding: 0 15px;
-            display: none;
-            overflow: hidden;
+        .step {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .step:hover {
+            transform: scale(1.1);
+        }
+
+        .step-circle {
+            width: 20px;
+            height: 20px;
+            background-color: grey;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+
+        .step.completed .step-circle {
+            background-color: #28a745; /* Green for completed steps */
+        }
+
+        .step-title {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .details-container {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 800px;
+            padding: 15px;
             background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
 
-        h2 {
-            font-size: 20px;
+        .details-container h3 {
             margin-top: 0;
+        }
+
+        .status {
+            font-size: 12px;
+            color: #555;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>DDoS Incident Response Tutor</h1>
-        <p>
-            <strong>Scenario:</strong> You are a cloud cybersecurity expert hired by an e-commerce company 
-            that relies heavily on its website for customer sales and support. Today, you receive a high-priority ticket: 
-            users are unable to access the website, reporting slow load times and frequent disconnections.
-        </p>
+        <p><strong>Scenario:</strong> You are a cloud cybersecurity expert hired by an e-commerce company 
+        that relies heavily on its website for customer sales and support. Today, you receive a high-priority ticket: 
+        users are unable to access the website, reporting slow load times and frequent disconnections.</p>
     </header>
-    
-    
-    <main>
-        <!-- Step 1 -->
-        <button class="collapsible">Step 1: Detect DDoS Attack by identifying unusual traffic patterns</button>
-        <div class="content">
-            <h2>Detect DDoS Attack</h2>
-            <p>Analyze the provided logs and traffic patterns to identify potential signs of a DDoS attack.</p>
-            <pre>
-Time: 14:03 | IP: 192.168.1.1 | Requests: 300
-Time: 14:04 | IP: 192.168.2.15 | Requests: 5000
-...
-            </pre>
+
+    <div class="timeline-container">
+        <!-- Timeline -->
+        <div class="timeline">
+            <div class="step" id="step-incident" onclick="showDetails('incident')">
+                <div class="step-circle"></div>
+                <div class="step-title">Incident Ticket</div>
+                <div class="status" id="status-incident">Incomplete</div>
+            </div>
+            <div class="step" id="step-analyze" onclick="showDetails('analyze')">
+                <div class="step-circle"></div>
+                <div class="step-title">Analyze Traffic</div>
+                <div class="status" id="status-analyze">Incomplete</div>
+            </div>
+            <div class="step" id="step-scale" onclick="showDetails('scale')">
+                <div class="step-circle"></div>
+                <div class="step-title">Scale Infrastructure</div>
+                <div class="status" id="status-scale">Incomplete</div>
+            </div>
+            <div class="step" id="step-mitigation" onclick="showDetails('mitigation')">
+                <div class="step-circle"></div>
+                <div class="step-title">Mitigation Techniques</div>
+                <div class="status" id="status-mitigation">Incomplete</div>
+            </div>
+            <div class="step" id="step-release" onclick="showDetails('release')">
+                <div class="step-circle"></div>
+                <div class="step-title">Release Resources</div>
+                <div class="status" id="status-release">Incomplete</div>
+            </div>
+            <div class="step" id="step-reflect" onclick="showDetails('reflect')">
+                <div class="step-circle"></div>
+                <div class="step-title">Reflect & Report</div>
+                <div class="status" id="status-reflect">Incomplete</div>
+            </div>
         </div>
 
-        <!-- Step 2 -->
-        <button class="collapsible">Step 2: Scale the infrastructure to maintain service availability</button>
-        <div class="content">
-            <h2>Scale the Infrastructure</h2>
-            <p>Choose appropriate actions to scale resources and ensure website availability during the attack.</p>
-            <ul>
-                <li>Option 1: Add more virtual machines.</li>
-                <li>Option 2: Use auto-scaling tools provided by cloud providers.</li>
-            </ul>
+        <!-- Shared Details Section -->
+        <div id="details" class="details-container">
+            <h3>Details</h3>
+            <p>Select a step in the timeline to view details here.</p>
         </div>
-
-        <!-- Step 3 -->
-        <button class="collapsible">Step 3: Incorporate DDoS mitigation techniques</button>
-        <div class="content">
-            <h2>Incorporate Mitigation Techniques</h2>
-            <p>Implement rate limiting or enable managed DDoS protection to reduce attack impact.</p>
-            <ul>
-                <li>Enable Rate Limiting</li>
-                <li>Enable Managed DDoS Protection</li>
-            </ul>
-        </div>
-
-        <!-- Step 4 -->
-        <button class="collapsible">Step 4: Release additional resources when the anomaly subsides</button>
-        <div class="content">
-            <h2>Release Resources</h2>
-            <p>After the attack subsides, optimize resources by scaling back to reduce costs.</p>
-            <p>Monitor the traffic to ensure normalcy before reducing resources.</p>
-        </div>
-    </main>
-    
-    <footer>
-        <p>Content Tailored for CIT 182 - Principles of Cybersecurity</p>
-    </footer>
+    </div>
 
     <script>
-        // JavaScript to handle collapsible sections
-        document.querySelectorAll(".collapsible").forEach(button => {
-            button.addEventListener("click", () => {
-                button.classList.toggle("active");
-                const content = button.nextElementSibling;
-                content.style.display = content.style.display === "block" ? "none" : "block";
-            });
-        });
+        // Details content for each step
+        const stepDetails = {
+            incident: {
+                title: "Incident Ticket Received",
+                content: "A high-priority ticket has been logged. Investigate the issue to identify the root cause."
+            },
+            analyze: {
+                title: "Step 1: Analyze Traffic Patterns",
+                content: "Examine the logs and graphs to identify unusual traffic patterns and detect potential DDoS attacks."
+            },
+            scale: {
+                title: "Step 2: Scale the Infrastructure",
+                content: "Implement horizontal scaling to maintain service availability during the attack."
+            },
+            mitigation: {
+                title: "Step 3: Incorporate DDoS Mitigation Techniques",
+                content: "Enable rate limiting or managed DDoS protection to mitigate the attack."
+            },
+            release: {
+                title: "Step 4: Release Additional Resources",
+                content: "Optimize resources after the anomaly subsides by scaling back to reduce costs."
+            },
+            reflect: {
+                title: "Reflect and Report",
+                content: "Document the actions taken, lessons learned, and recommendations for future incidents."
+            }
+        };
+
+        // Function to display details for a selected step and mark as completed
+        function showDetails(step) {
+            const detailsContainer = document.getElementById("details");
+            detailsContainer.innerHTML = `
+                <h3>${stepDetails[step].title}</h3>
+                <p>${stepDetails[step].content}</p>
+            `;
+
+            // Mark the step as completed
+            document.getElementById(`status-${step}`).textContent = "Completed";
+            document.getElementById(`step-${step}`).classList.add("completed");
+        }
     </script>
 </body>
 </html>
