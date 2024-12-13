@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DDoS Incident Response Tutor</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Simple styles for collapsible sections */
+        .collapsible {
+            background-color: #f1f1f1;
+            color: #333;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 18px;
+        }
+
+        .active, .collapsible:hover {
+            background-color: #ddd;
+        }
+
+        .content {
+            padding: 0 15px;
+            display: none;
+            overflow: hidden;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DDoS Incident Response Tutor</h1>
+        <p>
+            <strong>Scenario:</strong> You are a cloud cybersecurity expert hired by an e-commerce company 
+            that relies heavily on its website for customer sales and support. Today, you receive a high-priority ticket: 
+            users are unable to access the website, reporting slow load times and frequent disconnections.
+        </p>
+    </header>
+    
+    
+    <main>
+        <!-- Step 1 -->
+        <button class="collapsible">Step 1: Detect DDoS Attack by identifying unusual traffic patterns</button>
+        <div class="content">
+            <h2>Detect DDoS Attack</h2>
+            <p>Analyze the provided logs and traffic patterns to identify potential signs of a DDoS attack.</p>
+            <pre>
+Time: 14:03 | IP: 192.168.1.1 | Requests: 300
+Time: 14:04 | IP: 192.168.2.15 | Requests: 5000
+...
+            </pre>
+        </div>
+
+        <!-- Step 2 -->
+        <button class="collapsible">Step 2: Scale the infrastructure to maintain service availability</button>
+        <div class="content">
+            <h2>Scale the Infrastructure</h2>
+            <p>Choose appropriate actions to scale resources and ensure website availability during the attack.</p>
+            <ul>
+                <li>Option 1: Add more virtual machines.</li>
+                <li>Option 2: Use auto-scaling tools provided by cloud providers.</li>
+            </ul>
+        </div>
+
+        <!-- Step 3 -->
+        <button class="collapsible">Step 3: Incorporate DDoS mitigation techniques</button>
+        <div class="content">
+            <h2>Incorporate Mitigation Techniques</h2>
+            <p>Implement rate limiting or enable managed DDoS protection to reduce attack impact.</p>
+            <ul>
+                <li>Enable Rate Limiting</li>
+                <li>Enable Managed DDoS Protection</li>
+            </ul>
+        </div>
+
+        <!-- Step 4 -->
+        <button class="collapsible">Step 4: Release additional resources when the anomaly subsides</button>
+        <div class="content">
+            <h2>Release Resources</h2>
+            <p>After the attack subsides, optimize resources by scaling back to reduce costs.</p>
+            <p>Monitor the traffic to ensure normalcy before reducing resources.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>Content Tailored for CIT 182 - Principles of Cybersecurity</p>
+    </footer>
+
+    <script>
+        // JavaScript to handle collapsible sections
+        document.querySelectorAll(".collapsible").forEach(button => {
+            button.addEventListener("click", () => {
+                button.classList.toggle("active");
+                const content = button.nextElementSibling;
+                content.style.display = content.style.display === "block" ? "none" : "block";
+            });
+        });
+    </script>
+</body>
+</html>
