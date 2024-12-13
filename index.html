@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,18 +29,19 @@
             align-items: center;
             position: relative;
             margin: 20px 0;
-            width: 100%;
-            max-width: 800px;
+            width: 90%;
+            flex-wrap: wrap;
+            /* Allow wrapping if necessary */
         }
 
         .timeline::after {
             content: '';
             position: absolute;
-            width: 100%;
+            width: calc(100% - 40px);
             height: 4px;
             background-color: #ccc;
             top: 50%;
-            left: 0;
+            left: 20px;
             z-index: 0;
         }
 
@@ -49,8 +51,13 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 0 10px;
             cursor: pointer;
             transition: transform 0.2s, background-color 0.2s;
+            width: 15%;
+            /* Set a fixed width for steps */
+            text-align: center;
+            /* Center text inside each step */
         }
 
         .step:hover {
@@ -66,12 +73,17 @@
         }
 
         .step.completed .step-circle {
-            background-color: #28a745; /* Green for completed steps */
+            background-color: #28a745;
+            /* Green for completed steps */
         }
 
         .step-title {
-            text-align: center;
             font-size: 14px;
+        }
+
+        .status {
+            font-size: 12px;
+            color: #555;
         }
 
         .details-container {
@@ -88,18 +100,64 @@
             margin-top: 0;
         }
 
-        .status {
-            font-size: 12px;
+        .ticket-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .ticket-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .feedback-box {
+            position: fixed;
+            bottom: 0;
+            /* Stick it to the bottom of the screen */
+            left: 0;
+            /* Align it to the left edge */
+            width: 100%;
+            /* Full width of the screen */
+            background-color: white;
+            /* Optional: Set background to differentiate from other content */
+            padding: 10px;
+            border-top: 2px solid #000;
+            /* Optional: Add a border at the top for visual separation */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            /* Optional: Add shadow for better visibility */
+            width: 80%;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .feedback-box h4 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .feedback-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .feedback-box ul li {
+            font-size: 14px;
             color: #555;
         }
     </style>
 </head>
+
 <body>
     <header>
-        <h1>DDoS Incident Response Tutor</h1>
-        <p><strong>Scenario:</strong> You are a cloud cybersecurity expert hired by an e-commerce company 
-        that relies heavily on its website for customer sales and support. Today, you receive a high-priority ticket: 
-        users are unable to access the website, reporting slow load times and frequent disconnections.</p>
+        <h1>Distributed Denial-of-Service (DDoS) Attack Response Tutor</h1>
     </header>
 
     <div class="timeline-container">
@@ -107,22 +165,22 @@
         <div class="timeline">
             <div class="step" id="step-incident" onclick="showDetails('incident')">
                 <div class="step-circle"></div>
-                <div class="step-title">Incident Ticket</div>
+                <div class="step-title">Investigate Incident Tickets</div>
                 <div class="status" id="status-incident">Incomplete</div>
             </div>
             <div class="step" id="step-analyze" onclick="showDetails('analyze')">
                 <div class="step-circle"></div>
-                <div class="step-title">Analyze Traffic</div>
+                <div class="step-title">Analyze Traffic and Utilization</div>
                 <div class="status" id="status-analyze">Incomplete</div>
             </div>
             <div class="step" id="step-scale" onclick="showDetails('scale')">
                 <div class="step-circle"></div>
-                <div class="step-title">Scale Infrastructure</div>
+                <div class="step-title">Restore Service Availability</div>
                 <div class="status" id="status-scale">Incomplete</div>
             </div>
             <div class="step" id="step-mitigation" onclick="showDetails('mitigation')">
                 <div class="step-circle"></div>
-                <div class="step-title">Mitigation Techniques</div>
+                <div class="step-title">Apply DDoS Mitigation Techniques</div>
                 <div class="status" id="status-mitigation">Incomplete</div>
             </div>
             <div class="step" id="step-release" onclick="showDetails('release')">
@@ -139,38 +197,306 @@
 
         <!-- Shared Details Section -->
         <div id="details" class="details-container">
-            <h3>Details</h3>
-            <p>Select a step in the timeline to view details here.</p>
+            <h3>Welcome to the DDoS Incident Response Tutor</h3>
+            <p>
+                <strong>Scenario:</strong> You are a cloud cybersecurity expert hired by an e-commerce company
+                that relies heavily on its website for customer sales. Today, you are tasked with responding
+                to a high-priority incident: multiple users report that they are unable to access the website.
+            </p>
+            <p>
+                Follow the steps in the timeline to systematically analyze and respond to the incident. Begin by
+                selecting the first step, <strong>Incident Tickets</strong>, to review the information provided by
+                users
+                and frame the problem.
+            </p>
+
         </div>
+        <!-- Feedback Box -->
+        <div id="feedback-box" class="feedback-box">
+            <h4>Feedback:</h4>
+            <ul id="feedback-list"></ul>
+        </div>
+
+        <div style="height: 800px;"></div>
+
     </div>
 
     <script>
         // Details content for each step
         const stepDetails = {
             incident: {
-                title: "Incident Ticket Received",
-                content: "A high-priority ticket has been logged. Investigate the issue to identify the root cause."
+                title: "Step 1: Investigate the Incident TicketS",
+                content: `Before diving into resolving the issue, we must first fully understand what the users are reporting.
+
+    Your goal in this step:
+    <ul>
+        <li>Carefully review the ticket details to identify the symptoms reported by users.</li>
+        <li>Frame the problem based on the information provided, ensuring you understand the scope of the issue.</li>
+        <li>Take note of any patterns or relevant timestamps mentioned in the ticket for further analysis.</li>
+    </ul>
+    
+    Investigating the problem thoroughly will guide your next steps in diagnosing and addressing the incident effectively.
+    
+
+<h4>Support Tickets Submitted by Users:</h4>
+<div class="ticket-container">
+    <div class="ticket-card">
+        <h5>User: Alice | Date: Fri, Nov 29, 2024 03:15 PM</h5>
+        <strong>Title:</strong> I cannot access your website<br>
+        <strong>Details:</strong> I’ve been using the website for the past hour, but suddenly it stopped working. Now, it just times out whenever I try to load it.
+    </div>
+    <div class="ticket-card">
+        <h5>User: Bob | Date: Fri, Nov 29, 2024 03:20 PM</h5>
+        <strong>Title:</strong> Slow website response<br>
+        <strong>Details:</strong> The website was working fine earlier, but now it’s incredibly slow. Images don’t load, and buttons don’t work properly. I want to complete my checkout before the Black Friday discount ends.
+    </div>
+    <div class="ticket-card">
+        <h5>User: Charlie | Date: Fri, Nov 29, 2024 03:25 PM</h5>
+        <strong>Title:</strong> Connection errors<br>
+        <strong>Details:</strong> I was browsing the site, and it was fine for a while. But now, every few minutes, I get disconnected and have to refresh the page. It’s very frustrating.
+    </div>
+</div>
+
+
+
+<h4>Reflective Questions:</h4>
+    <p>1. Based on the tickets, what is the most likely type of issue being reported?</p>
+<label>
+    <input type="radio" name="q1" value="b" onclick="checkAnswer('q1', 'b')"> An issue with user accounts causing login failures
+</label><br>
+<label>
+    <input type="radio" name="q1" value="c" onclick="checkAnswer('q1', 'c')"> A browser compatibility issue preventing users from accessing the website
+</label><br>
+    <label>
+    <input type="radio" name="q1" value="a" onclick="checkAnswer('q1', 'a')"> A network connectivity issue affecting multiple users
+</label><br>
+
+<p>2. Which of the following should be your first priority based on the reports?</p>
+<label>
+    <input type="radio" name="q2" value="a" onclick="checkAnswer('q2', 'a')"> Check the server error logs
+</label><br>
+<label>
+    <input type="radio" name="q2" value="b" onclick="checkAnswer('q2', 'b')"> Investigate whether user accounts have been compromised
+</label><br>
+<label>
+    <input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'c')"> Monitor server traffic and CPU utilization to identify anomalies
+</label><br>
+    `
             },
             analyze: {
-                title: "Step 1: Analyze Traffic Patterns",
-                content: "Examine the logs and graphs to identify unusual traffic patterns and detect potential DDoS attacks."
+                title: "Step 2: Analyze Traffic and Utilization Patterns",
+                content: `
+            <p>In this step, you will analyze server traffic and CPU utilization graphs to identify the anomaly.</p>
+            <div class="graph-container">
+                <img src="incoming-traffic-over-time.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
+                <p>1. Based on the traffic graph, what anomaly is observed at 3 PM?</p>
+                <label>
+                    <input type="radio" name="q21" value="a" onclick="checkAnswer('q21', 'a')"> A sudden spike in server traffic
+                </label><br>
+                <label>
+                    <input type="radio" name="q21" value="b" onclick="checkAnswer('q21', 'b')"> A drop in server traffic
+                </label><br>
+                <label>
+                    <input type="radio" name="q21" value="c" onclick="checkAnswer('q21', 'c')"> No significant changes observed
+                </label><br>
+                <img src="infrastructure-utilization-over-time.png" alt="CPU Utilization Over Time" style="max-width: 100%;">
+
+                <p>2. What does the CPU utilization graph indicate about server performance at 3 PM?</p>
+                <label>
+                    <input type="radio" name="q22" value="a" onclick="checkAnswer('q22', 'a')"> CPU utilization remains stable
+                </label><br>
+                <label>
+                    <input type="radio" name="q22" value="b" onclick="checkAnswer('q22', 'b')"> CPU utilization spikes to nearly 100%
+                </label><br>
+                <label>
+                    <input type="radio" name="q22" value="c" onclick="checkAnswer('q22', 'c')"> CPU utilization decreases significantly
+                </label><br>
+            </div>
+
+                <p>3. Based on the information from the traffic and CPU graphs, which of the following is the most likely cause of the anomaly?</p>
+    <label>
+        <input type="radio" name="q23" value="a" onclick="checkAnswer('q23', 'a')"> A Distributed Denial of Service (DDoS) attack
+    </label><br>
+    <label>
+        <input type="radio" name="q23" value="b" onclick="checkAnswer('q23', 'b')"> A hardware failure in the server
+    </label><br>
+    <label>
+        <input type="radio" name="q23" value="c" onclick="checkAnswer('q23', 'c')"> A network routing issue
+    </label><br>
+
+        `
             },
             scale: {
-                title: "Step 2: Scale the Infrastructure",
-                content: "Implement horizontal scaling to maintain service availability during the attack."
+                title: "Step 3: Restore Service Availability",
+                content: ` 
+    <p>1. Your company relies on the e-commerce website availability, and any further unavailability incurs significant losses in revenue during the Black Friday scale. Considering this, what should be the immediate operations to take?</p>
+    <label>
+        <input type="radio" name="q31" value="a" onclick="checkAnswer('q31', 'a')"> Further investigate the server error logs to diagnose the issue.
+    </label><br>
+    <label>
+        <input type="radio" name="q31" value="b" onclick="checkAnswer('q31', 'b')"> Wait for the system to stabilize on its own.
+    </label><br>
+    <label>
+        <input type="radio" name="q31" value="c" onclick="checkAnswer('q31', 'c')"> Restore service availability by scaling infrastructure to ensure that users can continue to access the website and complete purchases.
+    </label><br>
+    <p>2. To restore service availability, which operation should be prioritized?</p>
+<label>
+    <input type="radio" name="q32" value="a" onclick="checkAnswer('q32', 'a')"> Provision more resources to handle the increased traffic
+</label><br>
+<label>
+    <input type="radio" name="q32" value="b" onclick="checkAnswer('q32', 'b')"> Decrease resources to save costs during the peak period
+</label><br>
+<label>
+    <input type="radio" name="q32" value="c" onclick="checkAnswer('q32', 'c')"> Wait for traffic to stabilize before taking any action
+</label><br>
+<p>3. You have scaled the infrastructure by provisioning more resources. What should be the next step?</p>
+<label>
+    <input type="radio" name="q33" value="b" onclick="checkAnswer('q33', 'b')"> Proceed to investigate the root cause of the issue immediately
+</label><br>
+<label>
+    <input type="radio" name="q33" value="a" onclick="checkAnswer('q33', 'a')"> Check the traffic and utilization graphs to confirm that service availability is restored
+</label><br>    
+
+<p>Now that you have scaled the infrastructure by provisioning more resources, you proceed to check the traffic and utilization graphs to confirm that service availability is restored.</p>
+ <div class="graph-container">
+                <img src="incoming-traffic-over-time-2.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
+</div>
+<p>With more resources provisioned, how does the traffic change?</p>
+<form>
+<label>
+    <input type="radio" name="q34" value="a" onclick="checkAnswer('q34', 'a')"> Traffic decreased.
+</label><br>
+<label>
+    <input type="radio" name="q34" value="b" onclick="checkAnswer('q34', 'b')"> Traffic stays the same.
+</label><br>
+</form>
+
+<div class="graph-container">
+    <img src="infrastructure-utilization-over-time-2.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
+</div>
+<p>After scaling the infrastructure by provisioning additional resources, how does it change CPU utilization?</p>
+<label>
+    <input type="radio" name="q35" value="a" onclick="checkAnswer('q35', 'a')"> CPU utilization decreases to normal levels.
+</label><br>
+<label>
+    <input type="radio" name="q35" value="b" onclick="checkAnswer('q35', 'b')"> CPU utilization remains at 100%.
+</label><br>
+<label>
+    <input type="radio" name="q35" value="c" onclick="checkAnswer('q35', 'c')"> CPU utilization increases further.
+</label><br>
+
+<p>After confirming that the server load is back to operating levels, what should you prioritize as the next step?</p>
+<form>
+    <label>
+        <input type="radio" name="q36" value="a" onclick="checkAnswer('q36', 'a')"> Notify affected users that service is back to normal.
+    </label><br>
+    <label>
+        <input type="radio" name="q36" value="b" onclick="checkAnswer('q36', 'b')"> Investigate the potential DDoS attack immediately.
+    </label><br>
+</form>
+
+                `
             },
+
             mitigation: {
-                title: "Step 3: Incorporate DDoS Mitigation Techniques",
-                content: "Enable rate limiting or managed DDoS protection to mitigate the attack."
+                title: "Step 4: Apply DDoS Mitigation Techniques",
+                content: `
+    <p>In this step, you will explore techniques to mitigate the DDoS attack and ensure the system remains stable and secure.</p>
+    
+
+    <p>What should be your priority when applying DDoS mitigation techniques?</p>
+        <form>
+            <label>
+                <input type="radio" name="q42" value="a" onclick="checkAnswer('q42', 'a')"> Block all incoming traffic
+            </label><br>
+            <label>
+                <input type="radio" name="q42" value="b" onclick="checkAnswer('q42', 'b')"> Configure it to differentiate between legitimate and malicious traffic
+            </label><br>
+            <label>
+                <input type="radio" name="q42" value="c" onclick="checkAnswer('q42', 'c')"> Redirect all traffic to a backup server
+            </label><br>
+        </form>
+
+    <p>Which mitigation technique can effectively prevent attackers from sending malicious repeated requests?</p>
+        <form>
+            <label>
+                <input type="radio" name="q41" value="a" onclick="checkAnswer('q41', 'a')"> Rate limiting
+            </label><br>
+            <label>
+                <input type="radio" name="q41" value="b" onclick="checkAnswer('q41', 'b')"> Traffic logging
+            </label><br>
+            <label>
+                <input type="radio" name="q41" value="c" onclick="checkAnswer('q41', 'c')"> Scaling infrastructure
+            </label><br>
+        </form>
+
+<p>Now that you have applied DDoS mitigation techniques, you proceed to check the traffic and utilization graphs to confirm that DDoS attack has been stopped.</p>
+<div class="graph-container">
+    <img src="incoming-traffic-over-time-3.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
+</div>
+<p>After applying mitigation techniques, how does the traffic change?</p>
+<form>
+
+    <label>
+        <input type="radio" name="q43" value="b" onclick="checkAnswer('q43', 'b')"> Traffic stays the same.
+    </label><br>
+    <label>
+        <input type="radio" name="q43" value="c" onclick="checkAnswer('q43', 'c')"> Traffic increases further.
+    </label><br>
+        <label>
+        <input type="radio" name="q43" value="a" onclick="checkAnswer('q43', 'a')"> Traffic decreases.
+    </label><br>
+</form>
+
+<div class="graph-container">
+    <img src="infrastructure-utilization-over-time-3.png" alt="CPU Utilization Over Time" style="max-width: 100%; margin-bottom: 20px;">
+</div>
+<p>After scaling the infrastructure and applying mitigation techniques, how does the CPU utilization change?</p>
+<form>
+    <label>
+        <input type="radio" name="q45" value="b" onclick="checkAnswer('q45', 'b')"> CPU utilization stays the same.
+    </label><br>
+    <label>
+        <input type="radio" name="q45" value="c" onclick="checkAnswer('q45', 'c')"> CPU utilization increases.
+    </label><br>
+        <label>
+        <input type="radio" name="q45" value="a" onclick="checkAnswer('q45', 'a')"> CPU utilization decreases.
+    </label><br>
+</form>
+ 
+    `
             },
             release: {
-                title: "Step 4: Release Additional Resources",
-                content: "Optimize resources after the anomaly subsides by scaling back to reduce costs."
+                title: "Step 5: Release Additional Resources",
+                content: `Once the malicious traffic has been mitigated and the infrastructure is stable, it's time to optimize your resource usage to reduce costs while maintaining availability. Over-provisioned resources can lead to unnecessary expenses, especially during periods of stable traffic.
+
+
+<div class="graph-container"> <img src="infrastructure-utilization-over-time-3.png" alt="CPU Utilization Over Time" style="max-width: 100%; margin-bottom: 20px;"> </div>
+Now that you have observed the infrastructure post-mitigation, you may notice that with the malicious traffic gone and the additional resources provisioned, the infrastructure is now underutilized. This is an indication that it is time to adjust resource allocation accordingly.
+
+<p>With the infrastructure underutilized after the malicious traffic has been mitigated, what should you do next?</p>
+<label> <input type="radio" name="q51" value="b" onclick="checkAnswer('q51', 'b')"> Increase the number of resources to prepare for further attacks. </label><br>
+<label> <input type="radio" name="q51" value="c" onclick="checkAnswer('q51', 'c')"> Keep the resources as they are to maintain readiness. </label><br>
+ <label> <input type="radio" name="q51" value="a" onclick="checkAnswer('q51', 'a')"> Decrease the number of resources to optimize costs. </label><br>
+
+`
             },
             reflect: {
-                title: "Reflect and Report",
-                content: "Document the actions taken, lessons learned, and recommendations for future incidents."
+                title: "Step 6: Reflect and Report",
+                content: `
+    <p>Great work systematically addressing this critical incident! Time to reflecting on your actions and outcomes.</p>
+
+    <h4>Summary of Completed Steps:</h4>
+    <ol>
+        <li><strong>Investigate Incident Tickets:</strong> Reviewed user-reported issues to identify symptoms and frame the scope of the problem.</li>
+        <li><strong>Analyze Traffic and Utilization:</strong> Monitored traffic and CPU utilization to detect anomalies and confirmed a potential DDoS attack.</li>
+        <li><strong>Restore Service Availability:</strong> Scaled the infrastructure to ensure service availability during peak traffic.</li>
+        <li><strong>Apply DDoS Mitigation Techniques:</strong> Deployed rate limiting, traffic filtering, and managed DDoS protection to stabilize traffic.</li>
+        <li><strong>Release Additional Resources:</strong> Scaled back over-provisioned infrastructure to optimize costs while maintaining readiness.</li>
+    </ol>
+    `
             }
+
         };
 
         // Function to display details for a selected step and mark as completed
@@ -179,12 +505,144 @@
             detailsContainer.innerHTML = `
                 <h3>${stepDetails[step].title}</h3>
                 <p>${stepDetails[step].content}</p>
+       ${step !== "reflect"
+                    ? `<p><b>Now that you have finished all the tasks in the current step, please proceed to the next step by clicking the respective step in the timeline above.</b></p>`
+                    : ""
+                }
             `;
 
             // Mark the step as completed
             document.getElementById(`status-${step}`).textContent = "Completed";
             document.getElementById(`step-${step}`).classList.add("completed");
         }
+
+        const answers = {
+            q1: "a",
+            q2: "c",
+            q21: "a",
+            q22: "b",
+            q23: "a",
+            q31: "c",
+            q32: "a",
+            q33: "a",
+            q34: "b",
+            q35: "a",
+            q36: "a",
+            q41: "a",
+            q42: "b",
+            q43: "a",
+            q45: "a",
+            q51: "a",
+        };
+
+        const feedback = {
+            q1: {
+                a: "Correct! Multiple users experiencing disconnections and timeout errors point to a network connectivity issue.",
+                b: "Incorrect. While login issues could prevent access, the symptoms reported (timeouts and disconnections) do not match login-related problems.",
+                c: "Incorrect. While browser issues can sometimes cause website access problems, the sudden and widespread nature of the reports suggests a network-related problem. Additionally, users mentioned the website was working fine earlier, ruling out browser compatibility issues."
+            },
+            q2: {
+                a: "Incorrect. Checking the server error logs might help later, but the tickets indicate performance-related issues that are better diagnosed through monitoring traffic and CPU utilization first.",
+                b: "Incorrect. There's no indication from the tickets that user accounts are compromised. The symptoms point to a broader performance issue.",
+                c: "Correct! The tickets describe performance-related issues like slow responses and disconnections. Monitoring server traffic and CPU utilization will help identify potential overloads or unusual patterns, which are likely causes."
+            },
+            q21: {
+                a: "Correct! The traffic graph clearly shows a sudden spike in server traffic at 3 PM, which is an anomaly.",
+                b: "Incorrect. The graph shows a spike, not a drop in traffic.",
+                c: "Incorrect. Significant changes are observed at 3 PM."
+            },
+            q22: {
+                a: "Incorrect. The CPU utilization graph shows a major change, not stability.",
+                b: "Correct! CPU utilization spikes to 100% at 3 PM, indicating server stress.",
+                c: "Incorrect. The CPU utilization increases rather than decreasing."
+            },
+            q23: {
+                a: "Correct! A DDoS attack could explain the sudden spike in traffic and the server's inability to handle the load, causing the CPU to max out.",
+                b: "Incorrect. While hardware failures can cause disruptions, the traffic and CPU patterns suggest a different issue, such as a DDoS attack or network congestion.",
+                c: "Incorrect. Network routing issues could cause disruptions, but they would typically not explain the traffic spike and CPU utilization seen here. A more likely explanation is a DDoS attack or high traffic demand."
+            },
+            q31: {
+                a: "Incorrect. While investigating the server error logs is important, the priority right now is to restore service availability and ensure the website remains accessible. Scaling infrastructure is the key action here.",
+                b: "Incorrect. Waiting for the system to stabilize will likely result in more downtime and loss of revenue. The priority should be to restore service availability by scaling infrastructure immediately.",
+                c: "Correct! Restoring service availability by scaling infrastructure ensures legitimate users can continue to access the website and complete purchases, preventing revenue loss during peak periods like Black Friday."
+            },
+            q32: {
+                a: "Correct! Provisioning more resources ensures the system can handle the increased traffic and restores availability.",
+                b: "Incorrect. Decreasing resources during a peak traffic period would worsen the situation.",
+                c: "Incorrect. Waiting for stabilization will result in more downtime and lost revenue."
+            },
+            q33: {
+                a: "Correct! Monitoring traffic and utilization graphs confirms if service availability has been restored.",
+                b: "Incorrect. While investigating the root cause is important, confirming restoration ensures current users can access the service.",
+            },
+            q34: {
+                a: "Incorrect. Provisioning more resources will not decrease the traffic; the purpose of provisioning more resources is to handle the existing traffic without system overload, not to reduce the traffic itself.",
+                b: "Correct! Traffic stays the same because provisioning resources does not alter the traffic level but ensures the system can better handle it.",
+            },
+            q35: {
+                a: "Correct! Provisioning additional resources reduces the strain on the infrastructure, bringing CPU utilization back to normal levels.",
+                b: "Incorrect. Scaling infrastructure prevents CPU utilization from staying at 100% by distributing the workload across more resources.",
+                c: "Incorrect. Additional resources are meant to handle the load, not increase CPU utilization further."
+            },
+            q36: {
+                a: "Correct! Notifying users is the immediate priority after service restoration. Transparency builds trust while investigations can proceed without further impacting user experience.",
+                b: "Incorrect. While investigating the potential DDoS attack is critical, notifying users that service is restored ensures trust and transparency."
+            },
+            q41: {
+                a: "Correct! Rate limiting restricts traffic from the same IP address, effectively preventing attackers from overwhelming the server using a limited number of machines.",
+                b: "Incorrect. Traffic logging helps monitor activity but does not actively mitigate the attack.",
+                c: "Incorrect. Scaling infrastructure is a reactive approach to increased load, not a direct DDoS mitigation technique."
+            },
+            q42: {
+                a: "Incorrect. Blocking all incoming traffic is not feasible as it would also prevent legitimate users from accessing the service.",
+                b: "Correct! Managed DDoS protection services should focus on differentiating between legitimate and malicious traffic to ensure service availability.",
+                c: "Incorrect. Redirecting traffic to a backup server does not address the root cause of the attack and can lead to the backup server being overwhelmed."
+            },
+            q43: {
+                a: "Correct! Applying mitigation techniques effectively reduces malicious traffic, thereby lowering overall traffic levels.",
+                b: "Incorrect. The mitigation techniques target malicious traffic and should reduce its volume.",
+                c: "Incorrect. If traffic increases further, the mitigation techniques are not properly configured or ineffective."
+            },
+            q45: {
+                a: "Correct! Mitigation techniques and infrastructure scaling alleviate server strain, reducing CPU utilization to normal levels.",
+                b: "Incorrect. The CPU utilization should drop after mitigation and scaling efforts, not remain unchanged.",
+                c: "Incorrect. If CPU utilization increases, either the mitigation techniques are not effective, or the scaling effort is insufficient."
+            },
+            q51: {
+                a: "Correct! Decreasing resources when underutilized helps optimize costs while maintaining necessary availability.",
+                b: "Incorrect. Increasing resources is unnecessary when traffic has stabilized and no malicious activity is detected.",
+                c: "Incorrect. Keeping the resources as they are can lead to over-provisioning and higher costs without added benefit."
+            }
+        };
+
+
+        function checkAnswer(question, selectedAnswer) {
+            const feedbackList = document.getElementById("feedback-list");
+            const correctAnswer = answers[question];
+
+            // Clear previous feedback for this question
+            const existingFeedback = document.querySelector(`#feedback-${question}`);
+            if (existingFeedback) {
+                feedbackList.removeChild(existingFeedback);
+            }
+
+            // Create new feedback item
+            const feedbackItem = document.createElement("li");
+            feedbackItem.id = `feedback-${question}`;
+            feedbackItem.textContent = feedback[question][selectedAnswer];
+
+            // Highlight correct/incorrect feedback
+            if (selectedAnswer === correctAnswer) {
+                feedbackItem.style.color = "green";
+            } else {
+                feedbackItem.style.color = "red";
+            }
+
+            // Append feedback
+            feedbackList.appendChild(feedbackItem);
+        }
+
     </script>
 </body>
+
 </html>
