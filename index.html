@@ -223,8 +223,10 @@
                     to a high-priority incident: multiple users report that they are unable to access the website.
                 </p>
                 <p>
-                    <strong>Instruction:</strong> In this tutor software, you will follow the steps listed in the "Steps to Complete" section in order to systematically analyze and respond to the incident. 
-                    Please get started by clicking the first step, <strong>Investigate Incident Tickets</strong>, to review the initial information and interpret the problem.
+                    <strong>Instruction:</strong> In this tutor software, you will follow the steps listed in the "Steps
+                    to Complete" section in order to systematically analyze and respond to the incident.
+                    Begin by clicking the first step <strong>"Investigate Incident Tickets"</strong>, to review the
+                    initial information and interpret the problem.
                 </p>
             </div>
 
@@ -271,7 +273,7 @@
         <strong>Details:</strong> I’ve been using the website for the past hour, but suddenly it stopped working. Now, it just times out whenever I try to load it.
     </div>
     <div class="ticket-card">
-        <h5>User: Bob | Date: Fri, Nov 29, 2024 03:20 PM</h5>
+        <h5>User: Bob | Date: Fri, November 29, 2024 3:20 PM</h5>
         <strong>Title:</strong> Slow website response<br>
         <strong>Details:</strong> The website was working fine earlier, but now it’s incredibly slow. Images don’t load, and buttons don’t work properly. I want to complete my checkout before the Black Friday discount ends.
     </div>
@@ -304,17 +306,17 @@
     <input type="radio" name="q2" value="b" onclick="checkAnswer('q2', 'b')"> Investigate whether user accounts have been compromised
 </label><br>
 <label>
-    <input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'c')"> Monitor server traffic and CPU utilization to identify anomalies
+    <input type="radio" name="q2" value="c" onclick="checkAnswer('q2', 'c')"> Monitor server traffic and CPU and memory utilization to identify anomalies
 </label><br>
     `
             },
             analyze: {
                 title: "Step 2: Analyze Traffic and Utilization Patterns",
+                // <img src="incoming-traffic-over-time.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
+                // <img src="infrastructure-utilization-over-time.png" alt="CPU and memory utilization Over Time" style="max-width: 100%;">
                 content: `
-            <p>In this step, you will analyze server traffic and CPU utilization graphs to identify the anomaly.</p>
-            <div class="graph-container">
-                <img src="incoming-traffic-over-time.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
-                <p>1. Based on the traffic graph, what anomaly is observed at 3 PM?</p>
+            <p>In this step, you will analyze the server traffic and CPU and memory utilization graphs displayed on the right to identify any anomalies.</p>
+                <p>1. Based on the <b>Incoming Traffic Over Time</b> graph, what anomaly is observed at 3 PM?</p>
                 <label>
                     <input type="radio" name="q21" value="a" onclick="checkAnswer('q21', 'a')"> A sudden spike in server traffic
                 </label><br>
@@ -324,35 +326,35 @@
                 <label>
                     <input type="radio" name="q21" value="c" onclick="checkAnswer('q21', 'c')"> No significant changes observed
                 </label><br>
-                <img src="infrastructure-utilization-over-time.png" alt="CPU Utilization Over Time" style="max-width: 100%;">
 
-                <p>2. What does the CPU utilization graph indicate about server performance at 3 PM?</p>
+                <p>2. What does the <b>Infrastructure CPU and Memory Utilization</b> graph indicate about server performance at 3 PM?</p>
                 <label>
-                    <input type="radio" name="q22" value="a" onclick="checkAnswer('q22', 'a')"> CPU utilization remains stable
+                    <input type="radio" name="q22" value="a" onclick="checkAnswer('q22', 'a')"> CPU and memory utilization remains stable
                 </label><br>
                 <label>
-                    <input type="radio" name="q22" value="b" onclick="checkAnswer('q22', 'b')"> CPU utilization spikes to nearly 100%
+                    <input type="radio" name="q22" value="b" onclick="checkAnswer('q22', 'b')"> CPU and memory utilization spikes to nearly 100%
                 </label><br>
                 <label>
-                    <input type="radio" name="q22" value="c" onclick="checkAnswer('q22', 'c')"> CPU utilization decreases significantly
+                    <input type="radio" name="q22" value="c" onclick="checkAnswer('q22', 'c')"> CPU and memory utilization decreases significantly
                 </label><br>
-            </div>
+            
 
-                <p>3. Based on the information from the traffic and CPU graphs, which of the following is the most likely cause of the anomaly?</p>
-    <label>
-        <input type="radio" name="q23" value="a" onclick="checkAnswer('q23', 'a')"> A Distributed Denial of Service (DDoS) attack
-    </label><br>
-    <label>
-        <input type="radio" name="q23" value="b" onclick="checkAnswer('q23', 'b')"> A hardware failure in the server
-    </label><br>
-    <label>
-        <input type="radio" name="q23" value="c" onclick="checkAnswer('q23', 'c')"> A network routing issue
-    </label><br>
-
+                <p>3. Based on the information from the traffic and utilization graphs, which of the following is the most likely cause of the anomaly?</p>
+                <label>
+                    <input type="radio" name="q23" value="b" onclick="checkAnswer('q23', 'b')"> A hardware failure in the server
+                </label><br>
+                <label>
+                    <input type="radio" name="q23" value="c" onclick="checkAnswer('q23', 'c')"> A network routing issue
+                </label><br>
+                <label>
+                    <input type="radio" name="q23" value="a" onclick="checkAnswer('q23', 'a')"> A Distributed Denial of Service (DDoS) attack
+                </label><br>
         `
             },
             scale: {
                 title: "Step 3: Restore Service Availability",
+                // <img src="incoming-traffic-over-time-2.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
+                // <img src="infrastructure-utilization-over-time-2.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
                 content: ` 
     <p>1. Your company relies on the e-commerce website availability, and any further unavailability incurs significant losses in revenue during the Black Friday scale. Considering this, what should be the immediate operations to take?</p>
     <label>
@@ -379,14 +381,12 @@
     <input type="radio" name="q33" value="b" onclick="checkAnswer('q33', 'b')"> Proceed to investigate the root cause of the issue immediately
 </label><br>
 <label>
-    <input type="radio" name="q33" value="a" onclick="checkAnswer('q33', 'a')"> Check the traffic and utilization graphs to confirm that service availability is restored
+    <input type="radio" name="q33" value="a" onclick="checkAnswer('q33', 'a')"> Analyze the traffic and utilization graphs to confirm that service availability is restored
 </label><br>    
 
-<p>Now that you have scaled the infrastructure by provisioning more resources, you proceed to check the traffic and utilization graphs to confirm that service availability is restored.</p>
- <div class="graph-container">
-                <img src="incoming-traffic-over-time-2.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
-</div>
-<p>With more resources provisioned, how does the traffic change?</p>
+<p>Now that you have scaled the infrastructure by provisioning additional resources, <b>the traffic and utilization graphs on the right have been updated to reflect the impact of these changes</b>. Analyze the updated graphs and answer the questions below.</p>
+
+<p>After provisioning more resources, how does the traffic change?</p>
 <form>
 <label>
     <input type="radio" name="q34" value="a" onclick="checkAnswer('q34', 'a')"> Traffic decreased.
@@ -396,18 +396,15 @@
 </label><br>
 </form>
 
-<div class="graph-container">
-    <img src="infrastructure-utilization-over-time-2.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
-</div>
-<p>After scaling the infrastructure by provisioning additional resources, how does it change CPU utilization?</p>
+<p>After scaling the infrastructure by provisioning additional resources, how does it change CPU and memory utilization?</p>
 <label>
-    <input type="radio" name="q35" value="a" onclick="checkAnswer('q35', 'a')"> CPU utilization decreases to normal levels.
+    <input type="radio" name="q35" value="a" onclick="checkAnswer('q35', 'a')"> CPU and memory utilization decreases to normal levels.
 </label><br>
 <label>
-    <input type="radio" name="q35" value="b" onclick="checkAnswer('q35', 'b')"> CPU utilization remains at 100%.
+    <input type="radio" name="q35" value="b" onclick="checkAnswer('q35', 'b')"> CPU and memory utilization remains at 100%.
 </label><br>
 <label>
-    <input type="radio" name="q35" value="c" onclick="checkAnswer('q35', 'c')"> CPU utilization increases further.
+    <input type="radio" name="q35" value="c" onclick="checkAnswer('q35', 'c')"> CPU and memory utilization increases further.
 </label><br>
 
 <p>After confirming that the server load is back to operating levels, what should you prioritize as the next step?</p>
@@ -425,6 +422,8 @@
 
             mitigation: {
                 title: "Step 4: Apply DDoS Mitigation Techniques",
+                // <img src="incoming-traffic-over-time-3.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
+                // <img src="infrastructure-utilization-over-time-3.png" alt="CPU and memory utilization Over Time" style="max-width: 100%; margin-bottom: 20px;">
                 content: `
     <p>In this step, you will explore techniques to mitigate the DDoS attack and ensure the system remains stable and secure.</p>
     
@@ -455,13 +454,10 @@
             </label><br>
         </form>
 
-<p>Now that you have applied DDoS mitigation techniques, you proceed to check the traffic and utilization graphs to confirm that DDoS attack has been stopped.</p>
-<div class="graph-container">
-    <img src="incoming-traffic-over-time-3.png" alt="Traffic Over Time" style="max-width: 100%; margin-bottom: 20px;">
-</div>
+<p>Now that you have applied DDoS mitigation techniques, the traffic and utilization graphs on the right have been updated to reflect the impact of these changes. Analyze the updated graphs and answer the questions below.</p>
+
 <p>After applying mitigation techniques, how does the traffic change?</p>
 <form>
-
     <label>
         <input type="radio" name="q43" value="b" onclick="checkAnswer('q43', 'b')"> Traffic stays the same.
     </label><br>
@@ -473,19 +469,17 @@
     </label><br>
 </form>
 
-<div class="graph-container">
-    <img src="infrastructure-utilization-over-time-3.png" alt="CPU Utilization Over Time" style="max-width: 100%; margin-bottom: 20px;">
-</div>
-<p>After scaling the infrastructure and applying mitigation techniques, how does the CPU utilization change?</p>
+<p>After applying DDoS mitigation techniques, how does the CPU and memory utilization change?
+</p>
 <form>
     <label>
-        <input type="radio" name="q45" value="b" onclick="checkAnswer('q45', 'b')"> CPU utilization stays the same.
+        <input type="radio" name="q45" value="b" onclick="checkAnswer('q45', 'b')"> CPU and memory utilization stays the same.
     </label><br>
     <label>
-        <input type="radio" name="q45" value="c" onclick="checkAnswer('q45', 'c')"> CPU utilization increases.
+        <input type="radio" name="q45" value="c" onclick="checkAnswer('q45', 'c')"> CPU and memory utilization increases.
     </label><br>
         <label>
-        <input type="radio" name="q45" value="a" onclick="checkAnswer('q45', 'a')"> CPU utilization decreases.
+        <input type="radio" name="q45" value="a" onclick="checkAnswer('q45', 'a')"> CPU and memory utilization decreases.
     </label><br>
 </form>
  
@@ -493,28 +487,51 @@
             },
             release: {
                 title: "Step 5: Release Additional Resources",
+                // <img src="infrastructure-utilization-over-time-3.png" alt="CPU and memory utilization Over Time" style="max-width: 100%; margin-bottom: 20px;"> 
                 content: `Once the malicious traffic has been mitigated and the infrastructure is stable, it's time to optimize your resource usage to reduce costs while maintaining availability. Over-provisioned resources can lead to unnecessary expenses, especially during periods of stable traffic.
 
-
-<div class="graph-container"> <img src="infrastructure-utilization-over-time-3.png" alt="CPU Utilization Over Time" style="max-width: 100%; margin-bottom: 20px;"> </div>
-Now that you have observed the infrastructure post-mitigation, you may notice that with the malicious traffic gone and the additional resources provisioned, the infrastructure is now underutilized. This is an indication that it is time to adjust resource allocation accordingly.
+Now that you have observed the infrastructure after mitigation, you may notice that with the malicious traffic gone and the additional resources provisioned, the infrastructure is now underutilized. This is an indication that it is time to adjust resource allocation accordingly.
 
 <p>With the infrastructure underutilized after the malicious traffic has been mitigated, what should you do next?</p>
 <label> <input type="radio" name="q51" value="b" onclick="checkAnswer('q51', 'b')"> Increase the number of resources to prepare for further attacks. </label><br>
 <label> <input type="radio" name="q51" value="c" onclick="checkAnswer('q51', 'c')"> Keep the resources as they are to maintain readiness. </label><br>
  <label> <input type="radio" name="q51" value="a" onclick="checkAnswer('q51', 'a')"> Decrease the number of resources to optimize costs. </label><br>
 
+
+ Now that you have scaled the infrastructure by removing excess resources, analyze the updated traffic and utilization graphs on the right to confirm that service availability has been restored. Note that the graphs reflect the impact of the scaling. Use them to answer the questions below.
+
+ <p>52. After removing excess resources, how does the traffic change?</p>
+<label>
+    <input type="radio" name="q52" value="a" onclick="checkAnswer('q52', 'a')"> Traffic decreases.
+</label><br>
+<label>
+    <input type="radio" name="q52" value="b" onclick="checkAnswer('q52', 'b')"> Traffic stays the same.
+</label><br>
+<label>
+    <input type="radio" name="q52" value="c" onclick="checkAnswer('q52', 'c')"> Traffic increases.
+</label><br>
+<p>53. After removing excess resources, how does CPU and memory utilization change?</p>
+<label>
+    <input type="radio" name="q53" value="a" onclick="checkAnswer('q53', 'a')"> CPU and memory utilization decreases.
+</label><br>
+<label>
+    <input type="radio" name="q53" value="b" onclick="checkAnswer('q53', 'b')"> CPU and memory utilization stays the same.
+</label><br>
+<label>
+    <input type="radio" name="q53" value="c" onclick="checkAnswer('q53', 'c')"> CPU and memory utilization increases.
+</label><br>
+
 `
             },
             reflect: {
                 title: "Step 6: Reflect and Report",
                 content: `
-    <p>Great work systematically addressing this critical incident! Time to reflecting on your actions and outcomes.</p>
+    <p>Great work systematically addressing this critical incident! Time to reflect on your actions and outcomes.</p>
 
     <h4>Summary of Completed Steps:</h4>
     <ol>
         <li><strong>Investigate Incident Tickets:</strong> Reviewed user-reported issues to identify symptoms and frame the scope of the problem.</li>
-        <li><strong>Analyze Traffic and Utilization:</strong> Monitored traffic and CPU utilization to detect anomalies and confirmed a potential DDoS attack.</li>
+        <li><strong>Analyze Traffic and Utilization:</strong> Monitored traffic and CPU and memory utilization to detect anomalies and confirmed a potential DDoS attack.</li>
         <li><strong>Restore Service Availability:</strong> Scaled the infrastructure to ensure service availability during peak traffic.</li>
         <li><strong>Apply DDoS Mitigation Techniques:</strong> Deployed rate limiting, traffic filtering, and managed DDoS protection to stabilize traffic.</li>
         <li><strong>Release Additional Resources:</strong> Scaled back over-provisioned infrastructure to optimize costs while maintaining readiness.</li>
@@ -523,6 +540,20 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
             }
 
         };
+
+        function updateChart(hour) {
+            fetch(`Assets/traffic-chart-1PM-${hour}PM.json`)
+                .then(response => response.json())
+                .then(data => {
+                    Plotly.newPlot("traffic-chart", data.data, data.layout);
+                });
+
+            fetch(`Assets/utilization-chart-1PM-${hour}PM.json`)
+                .then(response => response.json())
+                .then(data => {
+                    Plotly.newPlot("utilization-chart", data.data, data.layout);
+                });
+        }
 
         // Function to display details for a selected step and mark as completed
         function showDetails(step) {
@@ -562,61 +593,21 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
                     });
             }
 
-
             switch (step) {
                 case 'analyze':
-                    fetch("Assets/traffic-chart-1PM-4PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("traffic-chart", data.data, data.layout);
-                        });
-
-                    fetch("Assets/utilization-chart-1PM-4PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("utilization-chart", data.data, data.layout);
-                        });
+                    updateChart(4);
                     break;
                 case 'scale':
-                    fetch("Assets/traffic-chart-1PM-4PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("traffic-chart", data.data, data.layout);
-                        });
-
-                    fetch("Assets/utilization-chart-1PM-4PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("utilization-chart", data.data, data.layout);
-                        });
-                    // later transit to 1PM-5PM
+                    updateChart(4);
                     break;
                 case 'mitigation':
-                    fetch("Assets/traffic-chart-1PM-5PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("traffic-chart", data.data, data.layout);
-                        });
-
-                    fetch("Assets/utilization-chart-1PM-5PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("utilization-chart", data.data, data.layout);
-                        });
-                    // later transit to 1PM-6PM
+                    updateChart(5);
                     break;
                 case 'release':
-                    fetch("Assets/traffic-chart-1PM-6PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("traffic-chart", data.data, data.layout);
-                        });
-
-                    fetch("Assets/utilization-chart-1PM-6PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("utilization-chart", data.data, data.layout);
-                        });
+                    updateChart(6);
+                    break;
+                case 'reflect':
+                    updateChart(7);
                     break;
                 default:
                 // code block
@@ -644,6 +635,8 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
             q43: "a",
             q45: "a",
             q51: "a",
+            q52: "b",
+            q53: "c",
         };
 
         const feedback = {
@@ -653,9 +646,9 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
                 c: "Incorrect. While browser issues can sometimes cause website access problems, the sudden and widespread nature of the reports suggests a network-related problem. Additionally, users mentioned the website was working fine earlier, ruling out browser compatibility issues."
             },
             q2: {
-                a: "Incorrect. Checking the server error logs might help later, but the tickets indicate performance-related issues that are better diagnosed through monitoring traffic and CPU utilization first.",
+                a: "Incorrect. Checking the server error logs might help later, but the tickets indicate performance-related issues that are better diagnosed through monitoring traffic and CPU and memory utilization first.",
                 b: "Incorrect. There's no indication from the tickets that user accounts are compromised. The symptoms point to a broader performance issue.",
-                c: "Correct! The tickets describe performance-related issues like slow responses and disconnections. Monitoring server traffic and CPU utilization will help identify potential overloads or unusual patterns, which are likely causes."
+                c: "Correct! The tickets describe performance-related issues like slow responses and disconnections. Monitoring server traffic and CPU and memory utilization will help identify potential overloads or unusual patterns, which are likely causes."
             },
             q21: {
                 a: "Correct! The traffic graph clearly shows a sudden spike in server traffic at 3 PM, which is an anomaly.",
@@ -663,14 +656,14 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
                 c: "Incorrect. Significant changes are observed at 3 PM."
             },
             q22: {
-                a: "Incorrect. The CPU utilization graph shows a major change, not stability.",
-                b: "Correct! CPU utilization spikes to 100% at 3 PM, indicating server stress.",
-                c: "Incorrect. The CPU utilization increases rather than decreasing."
+                a: "Incorrect. The CPU and memory utilization graph shows a major change, not stability.",
+                b: "Correct! CPU and memory utilization spikes to 100% at 3 PM, indicating server stress.",
+                c: "Incorrect. The CPU and memory utilization increases rather than decreasing."
             },
             q23: {
                 a: "Correct! A DDoS attack could explain the sudden spike in traffic and the server's inability to handle the load, causing the CPU to max out.",
                 b: "Incorrect. While hardware failures can cause disruptions, the traffic and CPU patterns suggest a different issue, such as a DDoS attack or network congestion.",
-                c: "Incorrect. Network routing issues could cause disruptions, but they would typically not explain the traffic spike and CPU utilization seen here. A more likely explanation is a DDoS attack or high traffic demand."
+                c: "Incorrect. Network routing issues could cause disruptions, but they would typically not explain the traffic spike and CPU and memory utilization seen here. A more likely explanation is a DDoS attack or high traffic demand."
             },
             q31: {
                 a: "Incorrect. While investigating the server error logs is important, the priority right now is to restore service availability and ensure the website remains accessible. Scaling infrastructure is the key action here.",
@@ -691,9 +684,9 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
                 b: "Correct! Traffic stays the same because provisioning resources does not alter the traffic level but ensures the system can better handle it.",
             },
             q35: {
-                a: "Correct! Provisioning additional resources reduces the strain on the infrastructure, bringing CPU utilization back to normal levels.",
-                b: "Incorrect. Scaling infrastructure prevents CPU utilization from staying at 100% by distributing the workload across more resources.",
-                c: "Incorrect. Additional resources are meant to handle the load, not increase CPU utilization further."
+                a: "Correct! Provisioning additional resources reduces the strain on the infrastructure, bringing CPU and memory utilization back to normal levels.",
+                b: "Incorrect. Scaling infrastructure prevents CPU and memory utilization from staying at 100% by distributing the workload across more resources.",
+                c: "Incorrect. Additional resources are meant to handle the load, not increase CPU and memory utilization further."
             },
             q36: {
                 a: "Correct! Notifying users is the immediate priority after service restoration. Transparency builds trust while investigations can proceed without further impacting user experience.",
@@ -715,15 +708,27 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
                 c: "Incorrect. If traffic increases further, the mitigation techniques are not properly configured or ineffective."
             },
             q45: {
-                a: "Correct! Mitigation techniques and infrastructure scaling alleviate server strain, reducing CPU utilization to normal levels.",
-                b: "Incorrect. The CPU utilization should drop after mitigation and scaling efforts, not remain unchanged.",
-                c: "Incorrect. If CPU utilization increases, either the mitigation techniques are not effective, or the scaling effort is insufficient."
+                a: "Correct! DDoS mitigation techniques reduce the workload on the server by stopping malicious traffic, resulting in decreased CPU and memory utilization.",
+                b: "Incorrect. DDoS mitigation techniques are designed to alleviate server load by stopping malicious traffic, which typically results in a decrease in CPU and memory utilization.",
+                c: "Incorrect. Properly implemented DDoS mitigation techniques reduce the workload on the server by blocking malicious traffic, preventing an increase in CPU and memory utilization."
             },
             q51: {
-                a: "Correct! Decreasing resources when underutilized helps optimize costs while maintaining necessary availability.",
+                a: "Correct! Decreasing resources when underutilized helps reduce unnecessary expenses while maintaining required service availability.",
                 b: "Incorrect. Increasing resources is unnecessary when traffic has stabilized and no malicious activity is detected.",
                 c: "Incorrect. Keeping the resources as they are can lead to over-provisioning and higher costs without added benefit."
-            }
+            },
+
+            q52: {
+                a: "Incorrect. Removing excess resources does not cause traffic to decrease.",
+                b: "Correct! Traffic stays the same because resource adjustments do not impact the amount of incoming traffic.",
+                c: "Incorrect. Removing excess resources does not cause traffic to increase."
+            },
+
+            q53: {
+                a: "Incorrect. Removing excess resources does not decrease utilization.",
+                b: "Incorrect. Utilization will not stay the same after excess resources are removed.",
+                c: "Correct! CPU and memory utilization increases after removing excess resources, as the workload is now handled by fewer resources."
+            },
         };
 
 
@@ -751,6 +756,16 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
 
             // Append feedback
             feedbackList.appendChild(feedbackItem);
+
+            if (question === 'q33' && selectedAnswer === 'a') {
+                updateChart(5);
+            }
+            if (question === 'q41' && selectedAnswer === 'a') {
+                updateChart(6);
+            }
+            if (question === 'q51' && selectedAnswer === 'a') {
+                updateChart(7);
+            }
         }
 
     </script>
