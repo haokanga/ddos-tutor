@@ -232,6 +232,8 @@
 
             <div class="visualization-container">
                 <h3>Infrastructure Monitoring Dashboard</h3>
+                <p id="graph-text-instruction">Note: This section will display traffic and utilization graphs simulating
+                    real-world infrastructure monitoring for you to analyze while using the tutor software.</p>
                 <div id="traffic-chart" style="width: 1600px"></div>
                 <div id="utilization-chart" style="width: 1600px"></div>
             </div>
@@ -567,33 +569,16 @@ Now that you have observed the infrastructure after mitigation, you may notice t
                 }
             `;
 
-
-            // Function to dynamically filter data for a specific end hour
-            function plotChartWithRange(jsonUrl, chartId, endHour) {
-                fetch(jsonUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Get the original x-axis (time labels) and filter based on endHour
-                        const originalX = data.data[0].x; // Assumes all traces have the same x-axis
-                        const originalLength = originalX.length;
-                        const filteredLength = (endHour - 13) * 10; // Calculate the number of points for endHour (e.g., 1 PM–4 PM = 30 points)
-
-                        // Filter the x-axis and y-axis data for each trace
-                        data.data.forEach(trace => {
-                            trace.x = trace.x.slice(0, filteredLength); // Filter x-axis (time)
-                            trace.y = trace.y.slice(0, filteredLength); // Filter y-axis (utilization/traffic data)
-                        });
-
-                        // Update the layout to match the filtered x-axis
-                        data.layout.xaxis.tickvals = Array.from({ length: filteredLength }, (_, i) => i); // Adjust tickvals
-                        data.layout.xaxis.ticktext = originalX.slice(0, filteredLength); // Adjust ticktext (time labels)
-
-                        // Render the filtered chart
-                        Plotly.newPlot(chartId, data.data, data.layout);
-                    });
+            // Remove the graph text instruction
+            const graphTextInstruction = document.getElementById("graph-text-instruction");
+            if (graphTextInstruction) {
+                graphTextInstruction.style.display = "none"; // Hide the element
             }
 
             switch (step) {
+                case 'incident':
+                    updateChart(4);
+                    break;
                 case 'analyze':
                     updateChart(4);
                     break;
