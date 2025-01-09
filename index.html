@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDoS Incident Response Tutor</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -177,7 +178,7 @@
 
     <div class="timeline-container">
         <div class="timeline-milestones">
-            <h3>&nbsp;&nbsp;&nbsp;Milestones</h3>
+            <h3>&nbsp;&nbsp;&nbsp;Steps to Complete</h3>
             <!-- Timeline -->
             <div class="timeline">
                 <div class="step" id="step-incident" onclick="showDetails('incident')">
@@ -222,32 +223,15 @@
                     to a high-priority incident: multiple users report that they are unable to access the website.
                 </p>
                 <p>
-                    Follow the steps in the timeline to systematically analyze and respond to the incident. Begin by
-                    selecting the first step, <strong>Incident Tickets</strong>, to review the information provided by
-                    users
-                    and frame the problem.
+                    <strong>Instruction:</strong> In this tutor software, you will follow the steps listed in the "Steps to Complete" section in order to systematically analyze and respond to the incident. 
+                    Please get started by clicking the first step, <strong>Investigate Incident Tickets</strong>, to review the initial information and interpret the problem.
                 </p>
             </div>
 
             <div class="visualization-container">
                 <h3>Infrastructure Monitoring Dashboard</h3>
-                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
                 <div id="traffic-chart" style="width: 1600px"></div>
-                <script>
-                    fetch("Assets/traffic-chart-1PM-6PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("traffic-chart", data.data, data.layout);
-                        });
-                </script>
                 <div id="utilization-chart" style="width: 1600px"></div>
-                <script>
-                    fetch("Assets/utilization-chart-1PM-6PM.json")
-                        .then(response => response.json())
-                        .then(data => {
-                            Plotly.newPlot("utilization-chart", data.data, data.layout);
-                        });
-                </script>
             </div>
         </div>
 
@@ -551,6 +535,92 @@ Now that you have observed the infrastructure post-mitigation, you may notice th
                     : ""
                 }
             `;
+
+
+            // Function to dynamically filter data for a specific end hour
+            function plotChartWithRange(jsonUrl, chartId, endHour) {
+                fetch(jsonUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Get the original x-axis (time labels) and filter based on endHour
+                        const originalX = data.data[0].x; // Assumes all traces have the same x-axis
+                        const originalLength = originalX.length;
+                        const filteredLength = (endHour - 13) * 10; // Calculate the number of points for endHour (e.g., 1 PM–4 PM = 30 points)
+
+                        // Filter the x-axis and y-axis data for each trace
+                        data.data.forEach(trace => {
+                            trace.x = trace.x.slice(0, filteredLength); // Filter x-axis (time)
+                            trace.y = trace.y.slice(0, filteredLength); // Filter y-axis (utilization/traffic data)
+                        });
+
+                        // Update the layout to match the filtered x-axis
+                        data.layout.xaxis.tickvals = Array.from({ length: filteredLength }, (_, i) => i); // Adjust tickvals
+                        data.layout.xaxis.ticktext = originalX.slice(0, filteredLength); // Adjust ticktext (time labels)
+
+                        // Render the filtered chart
+                        Plotly.newPlot(chartId, data.data, data.layout);
+                    });
+            }
+
+
+            switch (step) {
+                case 'analyze':
+                    fetch("Assets/traffic-chart-1PM-4PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("traffic-chart", data.data, data.layout);
+                        });
+
+                    fetch("Assets/utilization-chart-1PM-4PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("utilization-chart", data.data, data.layout);
+                        });
+                    break;
+                case 'scale':
+                    fetch("Assets/traffic-chart-1PM-4PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("traffic-chart", data.data, data.layout);
+                        });
+
+                    fetch("Assets/utilization-chart-1PM-4PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("utilization-chart", data.data, data.layout);
+                        });
+                    // later transit to 1PM-5PM
+                    break;
+                case 'mitigation':
+                    fetch("Assets/traffic-chart-1PM-5PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("traffic-chart", data.data, data.layout);
+                        });
+
+                    fetch("Assets/utilization-chart-1PM-5PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("utilization-chart", data.data, data.layout);
+                        });
+                    // later transit to 1PM-6PM
+                    break;
+                case 'release':
+                    fetch("Assets/traffic-chart-1PM-6PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("traffic-chart", data.data, data.layout);
+                        });
+
+                    fetch("Assets/utilization-chart-1PM-6PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("utilization-chart", data.data, data.layout);
+                        });
+                    break;
+                default:
+                // code block
+            }
 
             // Mark the step as completed
             document.getElementById(`status-${step}`).textContent = "Completed";
