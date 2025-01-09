@@ -23,13 +23,20 @@
             align-items: center;
         }
 
+        .timeline-milestones {
+            width: 90%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
         .timeline {
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: relative;
             margin: 20px 0;
-            width: 90%;
+            width: 100%;
+            height: 150px;
             flex-wrap: wrap;
             /* Allow wrapping if necessary */
         }
@@ -86,6 +93,10 @@
             color: #555;
         }
 
+        .content {
+            display: flex;
+        }
+
         .details-container {
             margin-top: 30px;
             width: 100%;
@@ -96,8 +107,12 @@
             border-radius: 8px;
         }
 
-        .details-container h3 {
-            margin-top: 0;
+        .visualization-container {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
 
         .ticket-container {
@@ -161,56 +176,82 @@
     </header>
 
     <div class="timeline-container">
-        <!-- Timeline -->
-        <div class="timeline">
-            <div class="step" id="step-incident" onclick="showDetails('incident')">
-                <div class="step-circle"></div>
-                <div class="step-title">Investigate Incident Tickets</div>
-                <div class="status" id="status-incident">Incomplete</div>
+        <div class="timeline-milestones">
+            <h3>&nbsp;&nbsp;&nbsp;Milestones</h3>
+            <!-- Timeline -->
+            <div class="timeline">
+                <div class="step" id="step-incident" onclick="showDetails('incident')">
+                    <div class="step-circle"></div>
+                    <div class="step-title">Investigate Incident Tickets</div>
+                    <div class="status" id="status-incident">Incomplete</div>
+                </div>
+                <div class="step" id="step-analyze" onclick="showDetails('analyze')">
+                    <div class="step-circle"></div>
+                    <div class="step-title">Analyze Traffic and Utilization</div>
+                    <div class="status" id="status-analyze">Incomplete</div>
+                </div>
+                <div class="step" id="step-scale" onclick="showDetails('scale')">
+                    <div class="step-circle"></div>
+                    <div class="step-title">Restore Service Availability</div>
+                    <div class="status" id="status-scale">Incomplete</div>
+                </div>
+                <div class="step" id="step-mitigation" onclick="showDetails('mitigation')">
+                    <div class="step-circle"></div>
+                    <div class="step-title">Apply DDoS Mitigation Techniques</div>
+                    <div class="status" id="status-mitigation">Incomplete</div>
+                </div>
+                <div class="step" id="step-release" onclick="showDetails('release')">
+                    <div class="step-circle"></div>
+                    <div class="step-title">Release Resources</div>
+                    <div class="status" id="status-release">Incomplete</div>
+                </div>
+                <div class="step" id="step-reflect" onclick="showDetails('reflect')">
+                    <div class="step-circle"></div>
+                    <div class="step-title">Reflect & Report</div>
+                    <div class="status" id="status-reflect">Incomplete</div>
+                </div>
             </div>
-            <div class="step" id="step-analyze" onclick="showDetails('analyze')">
-                <div class="step-circle"></div>
-                <div class="step-title">Analyze Traffic and Utilization</div>
-                <div class="status" id="status-analyze">Incomplete</div>
+        </div>
+        <div class="content">
+            <!-- Shared Details Section -->
+            <div id="details" class="details-container">
+                <h3>Welcome to the DDoS Incident Response Tutor</h3>
+                <p>
+                    <strong>Scenario:</strong> You are a cloud cybersecurity expert hired by an e-commerce company
+                    that relies heavily on its website for customer sales. Today, you are tasked with responding
+                    to a high-priority incident: multiple users report that they are unable to access the website.
+                </p>
+                <p>
+                    Follow the steps in the timeline to systematically analyze and respond to the incident. Begin by
+                    selecting the first step, <strong>Incident Tickets</strong>, to review the information provided by
+                    users
+                    and frame the problem.
+                </p>
             </div>
-            <div class="step" id="step-scale" onclick="showDetails('scale')">
-                <div class="step-circle"></div>
-                <div class="step-title">Restore Service Availability</div>
-                <div class="status" id="status-scale">Incomplete</div>
-            </div>
-            <div class="step" id="step-mitigation" onclick="showDetails('mitigation')">
-                <div class="step-circle"></div>
-                <div class="step-title">Apply DDoS Mitigation Techniques</div>
-                <div class="status" id="status-mitigation">Incomplete</div>
-            </div>
-            <div class="step" id="step-release" onclick="showDetails('release')">
-                <div class="step-circle"></div>
-                <div class="step-title">Release Resources</div>
-                <div class="status" id="status-release">Incomplete</div>
-            </div>
-            <div class="step" id="step-reflect" onclick="showDetails('reflect')">
-                <div class="step-circle"></div>
-                <div class="step-title">Reflect & Report</div>
-                <div class="status" id="status-reflect">Incomplete</div>
+
+            <div class="visualization-container">
+                <h3>Infrastructure Monitoring Dashboard</h3>
+                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                <div id="traffic-chart" style="width: 1600px"></div>
+                <script>
+                    fetch("Assets/traffic-chart-1PM-6PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("traffic-chart", data.data, data.layout);
+                        });
+                </script>
+                <div id="utilization-chart" style="width: 1600px"></div>
+                <script>
+                    fetch("Assets/utilization-chart-1PM-6PM.json")
+                        .then(response => response.json())
+                        .then(data => {
+                            Plotly.newPlot("utilization-chart", data.data, data.layout);
+                        });
+                </script>
             </div>
         </div>
 
-        <!-- Shared Details Section -->
-        <div id="details" class="details-container">
-            <h3>Welcome to the DDoS Incident Response Tutor</h3>
-            <p>
-                <strong>Scenario:</strong> You are a cloud cybersecurity expert hired by an e-commerce company
-                that relies heavily on its website for customer sales. Today, you are tasked with responding
-                to a high-priority incident: multiple users report that they are unable to access the website.
-            </p>
-            <p>
-                Follow the steps in the timeline to systematically analyze and respond to the incident. Begin by
-                selecting the first step, <strong>Incident Tickets</strong>, to review the information provided by
-                users
-                and frame the problem.
-            </p>
 
-        </div>
         <!-- Feedback Box -->
         <div id="feedback-box" class="feedback-box">
             <h4>Feedback:</h4>
