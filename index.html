@@ -300,7 +300,7 @@
     <input type="radio" name="q1" value="a" onclick="checkAnswer('q1', 'a')"> A network connectivity issue affecting multiple users
 </label><br>
 
-<p>2. Which of the following should be your first priority based on the reports?</p>
+<p>2. Which of the following should be your first priority based on the user tickets?</p>
 <label>
     <input type="radio" name="q2" value="a" onclick="checkAnswer('q2', 'a')"> Check the server error logs
 </label><br>
@@ -623,7 +623,7 @@ Now that you have observed the infrastructure after mitigation, you may notice t
             q52: "b",
             q53: "c",
         };
-
+        // default hint: Please select the correct answer for the highlighted radio button group.
         const feedback = {
             q1: {
                 a: "Correct! Multiple users experiencing disconnections and timeout errors point to a network connectivity issue.",
