@@ -1,7 +1,7 @@
 <style>
     .timeline {
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       position: relative;
       margin: 20px 0;
@@ -26,7 +26,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 0 10px;
+      margin: 0 5px;
       cursor: pointer;
       transition: transform 0.2s, background-color 0.2s;
       width: 15%;
@@ -60,7 +60,7 @@
     <div class="step" id="step-incident" onclick="showDetails('incident')">
       <div class="step-circle">
       </div>
-      <div class="step-title">Investigate Incident Tickets
+      <div class="step-title">Investigate<br/>Incident Tickets
       </div>
       <div class="status" id="status-incident">Incomplete
       </div>
@@ -68,7 +68,7 @@
     <div class="step" id="step-analyze" onclick="showDetails('analyze')">
       <div class="step-circle">
       </div>
-      <div class="step-title">Analyze Traffic and Utilization
+      <div class="step-title">Analyze<br/>Traffic and Utilization
       </div>
       <div class="status" id="status-analyze">Incomplete
       </div>
@@ -76,7 +76,7 @@
     <div class="step" id="step-scale" onclick="showDetails('scale')">
       <div class="step-circle">
       </div>
-      <div class="step-title">Restore Service Availability
+      <div class="step-title">Restore<br/>Service Availability
       </div>
       <div class="status" id="status-scale">Incomplete
       </div>
@@ -84,7 +84,7 @@
     <div class="step" id="step-mitigation" onclick="showDetails('mitigation')">
       <div class="step-circle">
       </div>
-      <div class="step-title">Apply DDoS Mitigation Techniques
+      <div class="step-title">Apply<br/>DDoS Mitigation Techniques
       </div>
       <div class="status" id="status-mitigation">Incomplete
       </div>
@@ -92,7 +92,7 @@
     <div class="step" id="step-release" onclick="showDetails('release')">
       <div class="step-circle">
       </div>
-      <div class="step-title">Release Resources
+      <div class="step-title">Release<br/>Resources
       </div>
       <div class="status" id="status-release">Incomplete
       </div>
@@ -100,7 +100,7 @@
     <div class="step" id="step-reflect" onclick="showDetails('reflect')">
       <div class="step-circle">
       </div>
-      <div class="step-title">Reflect & Report
+      <div class="step-title">Reflect<br/>on the Incident
       </div>
       <div class="status" id="status-reflect">Incomplete
       </div>
