@@ -97,3 +97,26 @@ document.addEventListener('DOMContentLoaded', () => {
     displayContent("intro");
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const buttonMappings = [
+        { buttonId: "buttonIncidentNextStep", targetStep: "analyze" },
+        { buttonId: "buttonAnalyzePreviousStep", targetStep: "incident" },
+        { buttonId: "buttonAnalyzeNextStep", targetStep: "scale" },
+        { buttonId: "buttonScalePreviousStep", targetStep: "analyze" },
+        { buttonId: "buttonScaleNextStep", targetStep: "mitigation" },
+        { buttonId: "buttonMitigationPreviousStep", targetStep: "scale" },
+        { buttonId: "buttonMitigationNextStep", targetStep: "release" },
+        { buttonId: "buttonReleasePreviousStep", targetStep: "mitigation" },
+        { buttonId: "buttonReleaseNextStep", targetStep: "reflect" },
+        { buttonId: "buttonReflectPreviousStep", targetStep: "release" },
+    ];
+
+    buttonMappings.forEach(({ buttonId, targetStep }) => {
+        const button = document.getElementById(buttonId);
+        if (button) {
+            button.addEventListener("click", () => showDetails(targetStep));
+        } else {
+            console.warn(`Button with id "${buttonId}" not found.`);
+        }
+    });
+});
