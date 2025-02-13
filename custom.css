@@ -2,5 +2,55 @@
 
 /* Ensure labels align vertically with radio buttons */
 #content-left label {
-    line-height: normal; /* Prevents excessive spacing */
+    /* Prevents excessive spacing for radio button group options */
+    line-height: normal;
+}
+
+
+/* Make each content container scrollable on its own */
+#content-left {
+    overflow-y: scroll;
+    width: 30%;
+    /* this overrides the visible width as in CTAT GUI editor */
+}
+
+#content-right {
+    overflow-y: scroll;
+    width: 70%;
+}
+
+html,
+body {
+    height: 100%;
+    /* Ensure the body takes up the full viewport height */
+    margin: 0;
+    /* Remove default margin */
+}
+
+body>div {
+    display: flex;
+    /* Use flexbox for layout */
+    flex-direction: column;
+    /* Stack child elements vertically */
+    height: 100%;
+    /* Ensure the div takes up the full height of the viewport */
+}
+
+#top-half {
+    height: 30%;
+}
+
+#bottom-half {
+    height: 70%;
+}
+
+
+#traffic-chart {
+    height: 400px; /* Fix the height of the graphs */
+    min-height: 400px; /* Ensure the height is not reduced */
+}
+
+#utilization-chart {
+    height: 400px; /* Fix the height of the graphs */
+    min-height: 400px; /* Ensure the height is not reduced */
 }

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.ctat.cs.cmu.edu/releases/lab/CTAT.css" />
+    <link rel="stylesheet" href="https://cdn.ctat.cs.cmu.edu/releases/lab/html-editor-default.css" />
+    <link rel="stylesheet" href="./Assets/ddos-styles.css" />
+    <link rel="stylesheet" href="https://cdn.ctat.cs.cmu.edu/releases/lab/guppy/guppy-default-osk.min.css">
+    <script src="https://cdn.ctat.cs.cmu.edu/releases/lab/guppy/guppy.min.js"></script>
+    <script src="https://cdn.ctat.cs.cmu.edu/releases/lab/guppy/guppy_osk.js"></script>
+    <script type="text/javascript" src="https://cdn.ctat.cs.cmu.edu/releases/lab/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.ctat.cs.cmu.edu/releases/lab/nools.js"></script>
+    <script type="text/javascript" src="https://cdn.ctat.cs.cmu.edu/releases/lab/ctat.min.js"></script>
+    <script type="text/javascript" src="https://cdn.ctat.cs.cmu.edu/releases/lab/ctatloader.js"></script>
+
+</head>
+
+<body>
+    <div>
+        <div id="top-half" class="flexcolumn">
+            <section id="title" class="flexrow">
+                <div id="ihx5" class="CTATTextField">
+                    <div>
+                        Distributed Denial-of-Service (DDoS) Attack Response Tutor
+                    </div>
+                </div>
+            </section>
+            <section id="hint-and-milestone" class="flexrow">
+                <div id="hint-section" class="flexcolumn">
+                    <div id="iv1aow" class="CTATTextField">
+                        <div>
+                            <i>The box below will display hints when you click the Hint button or provide feedback after
+                                you choose an answer for a step.</i>
+                        </div>
+                    </div>
+                    <div id="hint-box" class="CTATHintWindow"></div>
+                    <div id="ibx1y" class="CTATHintButton"></div>
+                </div>
+                <div id="steps-to-complete" class="flexcolumn">
+                    <div id="idfmc" class="CTATTextField">
+                        Steps to Complete
+                    </div>
+                    <div id="ilc5k">
+                        <div class="timeline">
+                            <div id="step-incident" class="step">
+                                <div class="step-circle"></div>
+                                <div class="step-title">
+                                    Investigate <br />Incident Tickets
+                                </div>
+                                <div id="status-incident" class="status">
+                                    Incomplete
+                                </div>
+                            </div>
+                            <div id="step-analyze" class="step">
+                                <div class="step-circle"></div>
+                                <div class="step-title">
+                                    Analyze <br />Traffic and Utilization
+                                </div>
+                                <div id="status-analyze" class="status">
+                                    Incomplete
+                                </div>
+                            </div>
+                            <div id="step-scale" class="step">
+                                <div class="step-circle"></div>
+                                <div class="step-title">
+                                    Restore <br />Service Availability
+                                </div>
+                                <div id="status-scale" class="status">
+                                    Incomplete
+                                </div>
+                            </div>
+                            <div id="step-mitigation" class="step">
+                                <div class="step-circle"></div>
+                                <div class="step-title">
+                                    Apply <br />DDoS Mitigation Techniques
+                                </div>
+                                <div id="status-mitigation" class="status">
+                                    Incomplete
+                                </div>
+                            </div>
+                            <div id="step-release" class="step">
+                                <div class="step-circle"></div>
+                                <div class="step-title">
+                                    Release <br />Resources
+                                </div>
+                                <div id="status-release" class="status">
+                                    Incomplete
+                                </div>
+                            </div>
+                            <div id="step-reflect" class="step">
+                                <div class="step-circle"></div>
+                                <div class="step-title">
+                                    Reflect <br />on the Incident
+                                </div>
+                                <div id="status-reflect" class="status">
+                                    Incomplete
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <section id="bottom-half" class="flexrow">
+            <div id="content-left" class="flexcolumn">
+                <div id="intro" class="flexcolumn">
+                    <div id="intro-description" class="CTATTextField">
+                        <h3>
+                            Welcome to the DDoS Incident Response Tutor
+                        </h3>
+                        <p>
+                            <strong>Scenario:</strong>&nbsp;You are a cloud cybersecurity expert hired by an e-commerce
+                            company that relies heavily on its website for customer sales. Today, you are tasked with
+                            responding to a high-priority incident: multiple users report that they are unable to access
+                            the website.
+                        </p>
+                        <p>
+                            <strong>Instruction:</strong>&nbsp;In this tutor software, you will follow the steps listed
+                            in the "Steps to Complete" section in order to systematically analyze and respond to the
+                            incident. Begin by clicking the first step&nbsp;<strong>"Investigate Incident
+                                Tickets"</strong>, to review the initial information and interpret the problem.
+                        </p>
+                    </div>
+                </div>
+                <div id="incident" class="flexcolumn">
+                    <div id="step1-description" class="CTATTextField">
+                        <h3>
+                            Step 1: Investigate the Incident Tickets
+                        </h3>
+                        <p>
+                            Before diving into resolving the issue, we must first fully understand what the users are
+                            reporting. Your goal in this step:
+                        </p>
+                        <ul>
+                            <li>
+                                Carefully review the ticket details to identify the symptoms reported by users.
+                            </li>
+                            <li>
+                                Frame the problem based on the information provided, ensuring you understand the scope
+                                of the issue.
+                            </li>
+                            <li>
+                                Take note of any patterns or relevant timestamps mentioned in the ticket for further
+                                analysis.
+                            </li>
+                        </ul>
+                        <span style="background-color: rgb(249, 249, 249);">Investigating the problem thoroughly will
+                            guide your next steps in diagnosing and addressing the incident effectively.</span>
+                    </div>
+                    <div id="tickets-title" class="CTATTextField">
+                        <div>
+                            <br>
+                        </div>
+                        <div>
+                            <div>
+                                <b>Support Tickets Submitted by Users:</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ticket-1" class="flexcolumn">
+                        <div id="ialoa" class="CTATTextField">
+                            <div>
+                                User: Alice | Date: Fri, Nov 29, 2024 03:15 PM
+                            </div>
+                        </div>
+                        <div id="igqtu" class="CTATTextField">
+                            <div>
+                                <b>Title: </b>I cannot access your website
+                            </div>
+                        </div>
+                        <div id="iytih" class="CTATTextField">
+                            <b>Details: </b>I’ve been using the website for the past hour, but suddenly it stopped
+                            working. Now, it just times out whenever I try to load it.
+                        </div>
+                    </div>
+                    <div id="ticket-2" class="flexcolumn">
+                        <div id="i7eva" class="CTATTextField">
+                            <div>
+                                User: Bob | Date: Fri, November 29, 2024 3:20 PM
+                            </div>
+                        </div>
+                        <div id="ih249" class="CTATTextField">
+                            <div>
+                                <b>Title:&nbsp;</b>Slow website response
+                            </div>
+                        </div>
+                        <div id="itr4r" class="CTATTextField">
+                            <b>Details:&nbsp;</b>The website was working fine earlier, but now it’s incredibly slow.
+                            Images don’t load, and buttons don’t work properly. I want to complete my checkout before
+                            the Black Friday discount ends.
+                        </div>
+                    </div>
+                    <div id="ticket-3" class="flexcolumn">
+                        <div id="i0zci" class="CTATTextField">
+                            <div>
+                                User: Charlie | Date: Fri, Nov 29, 2024 03:25 PM
+                            </div>
+                        </div>
+                        <div id="iq3hq" class="CTATTextField">
+                            <div>
+                                <b>Title: </b>Connection errors
+                            </div>
+                        </div>
+                        <div id="ibobo" class="CTATTextField">
+                            <b>Details: </b>I was browsing the site, and it was fine for a while. But now, every few
+                            minutes, I get disconnected and have to refresh the page. It’s very frustrating.
+                        </div>
+                    </div>
+                    <div id="inngr" class="CTATTextField">
+                        <div>
+                            Based on the tickets, what is the most likely type of issue being reported?
+                        </div>
+                    </div>
+                    <div id="rbTicketAccount" data-ctat-label="An issue with user accounts causing login failures"
+                        name="rbTicket" data-ctat-show-feedback="false" data-ctat-disable-on-correct="true"
+                        class="CTATRadioButton"></div>
+                    <div id="rbTicketBrowser"
+                        data-ctat-label=" A browser compatibility issue preventing users from accessing the website"
+                        name="rbTicket" data-ctat-show-feedback="false" data-ctat-disable-on-correct="true"
+                        class="CTATRadioButton"></div>
+                    <div id="rbTicketNetwork" data-ctat-label=" A network connectivity issue affecting multiple users"
+                        name="rbTicket" data-ctat-show-feedback="false" data-ctat-disable-on-correct="true"
+                        class="CTATRadioButton"></div>
+                    <div id="ibxki" class="CTATTextField">
+                        <div>
+                            Which of the following should be your first priority based on the user tickets?
+                        </div>
+                    </div>
+                    <div data-ctat-label="Check the server error logs" name="rbTicketResponse" id="rbTicketResponseLogs"
+                        data-ctat-show-feedback="false" data-ctat-disable-on-correct="true" class="CTATRadioButton">
+                    </div>
+                    <div data-ctat-label="Investigate whether user accounts have been compromised"
+                        name="rbTicketResponse" id="rbTicketResponseAccount" data-ctat-show-feedback="false"
+                        data-ctat-disable-on-correct="true" class="CTATRadioButton"></div>
+                    <div data-ctat-label="Monitor server traffic and CPU and memory utilization to identify anomalies"
+                        name="rbTicketResponse" id="rbTicketResponseMonitor" data-ctat-show-feedback="false"
+                        data-ctat-disable-on-correct="true" class="CTATRadioButton"></div>
+                    <div id="iybb7" class="CTATTextField">
+                        <div>
+                            <b>Now that you have finished all the tasks in the current step, please proceed to the next
+                                step by clicking the next step in the "Steps to Complete" section above.</b>
+                        </div>
+                    </div>
+                </div>
+                <div id="analyze" class="flexcolumn">
+                    <div id="ilpd4" class="CTATTextField">
+                        <h3>
+                            Step 2: Analyze Traffic and Utilization Patterns
+                        </h3>
+                        <h3>
+                            <p style="font-size: medium; font-weight: 400;"></p>
+                            <p style="font-size: medium; font-weight: 400;">
+                                In this step, you will analyze the server traffic and CPU and memory utilization graphs
+                                displayed on the right to identify any anomalies.
+                            </p>
+                        </h3>
+                    </div>
+                    <div id="icses" class="CTATTextField">
+                        <div>
+                            Based on the <b>Incoming Traffic Over Time</b> graph, what anomaly is observed at 3 PM?
+                        </div>
+                    </div>
+                    <div data-ctat-label="A sudden spike in server traffic" name="rbTraffic3PM"
+                        id="rbTraffic3PMIncrease" data-ctat-show-feedback="false" data-ctat-disable-on-correct="true"
+                        class="CTATRadioButton"></div>
+                    <div data-ctat-label="A drop in server traffic" name="rbTraffic3PM" id="rbTraffic3PMDecrease"
+                        data-ctat-show-feedback="false" data-ctat-disable-on-correct="true" class="CTATRadioButton">
+                    </div>
+                    <div data-ctat-label="No significant changes observed" name="rbTraffic3PM" id="rbTraffic3PMNoChange"
+                        data-ctat-show-feedback="false" data-ctat-disable-on-correct="true" class="CTATRadioButton">
+                    </div>
+                </div>
+                <div id="scale" class="flexcolumn">
+                    <div id="i8fkg" class="CTATTextField">
+                        <h3>
+                            Step 3: Restore Service Availability
+                        </h3>
+                    </div>
+                </div>
+                <div id="mitigation" class="flexcolumn">
+                    <div id="iyfkzr" class="CTATTextField">
+                        <h3>
+                            Step 4: Apply DDoS Mitigation Techniques
+                        </h3>
+                        <h3>
+                            <p style="font-size: medium; font-weight: 400;"></p>
+                            <p style="font-size: medium; font-weight: 400;">
+                                In this step, you will explore techniques to mitigate the DDoS attack and ensure the
+                                system remains stable and secure.
+                            </p>
+                        </h3>
+                    </div>
+                </div>
+                <div id="release" class="flexcolumn">
+                    <div id="i6zkum" class="CTATTextField">
+                        <h3>
+                            Step 5: Remove Additional Resources
+                        </h3>
+                        <h3>
+                            <p style="font-size: medium; font-weight: 400;">
+                                Once the malicious traffic has been mitigated and the infrastructure is stable, it's
+                                time to optimize your resource usage to reduce costs while maintaining availability.
+                                Over-provisioned resources can lead to unnecessary expenses, especially during periods
+                                of stable traffic. Now that you have observed the infrastructure after mitigation, you
+                                may notice that with the malicious traffic gone and the additional resources
+                                provisioned, the infrastructure is now underutilized. This is an indication that it is
+                                time to adjust resource allocation accordingly.
+                            </p>
+                        </h3>
+                    </div>
+                </div>
+                <div id="reflect" class="flexcolumn">
+                    <div id="i3uog9" class="CTATTextField">
+                        <h3>
+                            Step 6: Reflect and Report
+                        </h3>
+                        <h3>
+                            <p style="font-size: medium; font-weight: 400;"></p>
+                            <p style="font-size: medium; font-weight: 400;">
+                                Great work systematically addressing this critical incident! Time to reflect on your
+                                actions and outcomes.
+                            </p>
+                        </h3>
+                    </div>
+                    <div id="done" class="CTATDoneButton"></div>
+                </div>
+            </div>
+            <div id="content-right" class="flexcolumn">
+                <div id="i96r7" class="CTATTextField">
+                    <h3>
+                        Infrastructure Monitoring Dashboard
+                    </h3>
+                    <div>
+                        <div>
+                            Note: This section will display traffic and utilization graphs simulating real-world
+                            infrastructure monitoring for you to analyze while using the tutor software.
+                        </div>
+                    </div>
+                </div>
+                <section id="traffic-chart" class="flexrow"></section>
+                <section id="utilization-chart" class="flexrow"></section>
+            </div>
+        </section>
+        <div id="irhpw"></div>
+    </div>
+</body>
+
+</html>
