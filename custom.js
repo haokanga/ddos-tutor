@@ -66,6 +66,7 @@ function displayContent(step) {
 function complete(step) {
     const statusElement = document.getElementById(`status-${step}`);
     const stepElement = document.getElementById(`step-${step}`);
+    const navElement = document.querySelector(`#${step} .step-navigation`);
 
     if (statusElement) {
         statusElement.textContent = "Completed";
@@ -114,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const buttonMappings = [
+        { buttonId: "buttonIntroductionNextStep", targetStep: "incident" },
         { buttonId: "buttonIncidentNextStep", targetStep: "analyze" },
         { buttonId: "buttonAnalyzePreviousStep", targetStep: "incident" },
         { buttonId: "buttonAnalyzeNextStep", targetStep: "scale" },
