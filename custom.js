@@ -37,6 +37,14 @@ function showDetails(step) {
         default:
             console.error(`Unknown step: ${step}`);
     }
+
+    // Scroll the content container instead of the entire page
+    const contentContainer = document.getElementById("content-left"); 
+    if (contentContainer) {
+        contentContainer.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+        console.warn("Content container not found.");
+    }
 }
 
 // Function to display content for the current step and hide all other steps
