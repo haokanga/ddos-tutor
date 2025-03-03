@@ -78,6 +78,13 @@ function complete(step) {
     } else {
         console.warn(`Step element for step "${step}" not found.`);
     }
+
+    // Show step navigation when the step is marked as complete
+    if (navElement) {
+        navElement.style.display = "flex"; // Make it visible
+    } else {
+        console.warn(`Navigation element for step "${step}" not found.`);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
