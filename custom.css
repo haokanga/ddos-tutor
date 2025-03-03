@@ -59,6 +59,7 @@ body>div {
     margin-top: 20px;
     display: flex;
     justify-content: flex-end; /* Aligns the button to the right */
+    display: none; /* Hide by default */
 }
 
 .step-navigation button {
@@ -72,8 +73,25 @@ body>div {
     transition: background-color 0.2s ease-in-out;
     height: auto;
     justify-content: center;
+    display: flex; /*  The display: inline-block property prevents justify-content from having an effect. Try adding display: grid or display: flex to make this element into a container. */
 }
 
 .step-navigation button:hover {
     background-color: #0056b3;
 }
+
+#reflection-note textarea {
+    min-height: 120px;  /* Adjust initial height */
+    height: auto;  /* Allow dynamic height */
+    resize: vertical;  /* Allow manual resizing */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    font-size: 14px;  /* Maintain readability */
+    padding: 5px;  /* Improve text spacing */
+    width: 100%;  /* Ensure it fills container */
+}
+
+.CTATRadioButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
