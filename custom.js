@@ -15,6 +15,10 @@ function updateChart(hour) {
 // Function to display details for a selected step and mark as completed
 function showDetails(step) {
     switch (step) {
+        case 'intro':
+            // Will not display graphs at this step yet, as students focus on the user tickets
+            displayContent(step);
+            break;
         case 'incident':
             // Will not display graphs at this step yet, as students focus on the user tickets
             displayContent(step);
@@ -71,20 +75,20 @@ function complete(step) {
     if (statusElement) {
         statusElement.textContent = "Completed";
     } else {
-        console.warn(`Status element for step "${step}" not found.`);
+        console.log(`Status element for step "${step}" not found.`);
     }
 
     if (stepElement) {
         stepElement.classList.add("completed");
     } else {
-        console.warn(`Step element for step "${step}" not found.`);
+        console.log(`Step element for step "${step}" not found.`);
     }
 
     // Show step navigation when the step is marked as complete
     if (navElement) {
         navElement.style.display = "flex"; // Make it visible
     } else {
-        console.warn(`Navigation element for step "${step}" not found.`);
+        console.log(`Navigation element for step "${step}" not found.`);
     }
 }
 
@@ -116,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener("DOMContentLoaded", () => {
     const buttonMappings = [
         { buttonId: "buttonIntroductionNextStep", targetStep: "incident" },
+        { buttonId: "buttonIncidentPreviousStep", targetStep: "intro" },
         { buttonId: "buttonIncidentNextStep", targetStep: "analyze" },
         { buttonId: "buttonAnalyzePreviousStep", targetStep: "incident" },
         { buttonId: "buttonAnalyzeNextStep", targetStep: "scale" },
@@ -125,7 +130,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { buttonId: "buttonMitigationNextStep", targetStep: "release" },
         { buttonId: "buttonReleasePreviousStep", targetStep: "mitigation" },
         { buttonId: "buttonReleaseNextStep", targetStep: "reflect" },
-        { buttonId: "buttonReflectPreviousStep", targetStep: "release" },
     ];
 
     buttonMappings.forEach(({ buttonId, targetStep }) => {

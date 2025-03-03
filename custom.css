@@ -58,8 +58,9 @@ body>div {
 .step-navigation {
     margin-top: 20px;
     display: flex;
-    justify-content: flex-end; /* Aligns the button to the right */
-    display: none; /* Hide by default */
+    justify-content: space-between; /* Distributes buttons evenly */
+    align-items: center; /* Aligns buttons vertically in the center */
+    /* display: none; Hide by default */
 }
 
 #ifdfig {
